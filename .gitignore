@@ -1,0 +1,32 @@
+# Python compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+.env
+
+# Distribution / packaging
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Logs and reports
+*.log
+*.csv
+*.json
+
+# OS files
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+
+# Archives
+Smart_IT_Service_Desk_Project.zip
