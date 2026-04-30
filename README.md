@@ -76,6 +76,17 @@ git branch -M main
 git push -u origin main
 ```
 
+## GitHub Pages
+
+A static landing page is included at `docs/index.html`.
+After pushing the repo, enable GitHub Pages from the repository settings using the `main` branch and the `/docs` folder as the source.
+
+The live site link will then be:
+
+```text
+https://<your-username>.github.io/<repo-name>/
+```
+
 ## Notes
 
 - The CLI is the primary interface for the project.
