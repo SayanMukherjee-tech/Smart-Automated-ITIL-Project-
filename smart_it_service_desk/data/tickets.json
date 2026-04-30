@@ -1,0 +1,26 @@
+[
+  {
+    "ticket_id": "TKT-001",
+    "employee_name": "Amina Roberts",
+    "department": "Finance",
+    "issue_description": "Server Down in payroll environment",
+    "category": "Incident",
+    "priority": "P1",
+    "status": "Open",
+    "created_date": "2026-04-30T08:10:00",
+    "sla_deadline": "2026-04-30T09:10:00",
+    "resolved_date": null
+  },
+  {
+    "ticket_id": "TKT-002",
+    "employee_name": "Ravi Patel",
+    "department": "HR",
+    "issue_description": "Password Reset request for new employee",
+    "category": "Service Request",
+    "priority": "P4",
+    "status": "Closed",
+    "created_date": "2026-04-29T14:20:00",
+    "sla_deadline": "2026-04-30T14:20:00",
+    "resolved_date": "2026-04-29T15:00:00"
+  }
+]

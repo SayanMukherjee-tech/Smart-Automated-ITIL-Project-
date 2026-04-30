@@ -1,0 +1,14 @@
+{
+  "date": "2026-04-30",
+  "summary": {
+    "total": 2,
+    "open": 1,
+    "closed": 1,
+    "high_priority": 1,
+    "sla_breaches": 1
+  },
+  "most_common_issue": "Server Down in payroll environment",
+  "average_resolution_time": "0.67 hours",
+  "department_with_most_incidents": "Finance",
+  "repeated_problems": []
+}
