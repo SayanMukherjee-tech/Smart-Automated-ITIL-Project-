@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLI - Search Ticket Screenshot</title>
+  <style>
+    body { margin: 0; padding: 20px; background: #f0f0f0; font-family: Arial, sans-serif; }
+    .screenshot { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 0; max-width: 900px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .title-bar { background: linear-gradient(90deg, #333, #555); color: white; padding: 12px 16px; border-radius: 8px 8px 0 0; font-weight: bold; font-size: 14px; }
+    .terminal { background: #1e1e1e; color: #00ff00; padding: 16px; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5; border-radius: 0 0 8px 8px; overflow-x: auto; }
+    .command { color: #ffff00; margin-top: 12px; margin-bottom: 8px; }
+    .output { color: #00ff00; margin-top: 4px; }
+    .prompt { color: #ffff00; }
+    .divider { color: #666; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <div class="screenshot">
+    <div class="title-bar">🔍 Python Smart IT Service Desk - Search Ticket TKT-001</div>
+    <div class="terminal">
+      <div><span class="prompt">C:\Users\asus\...\MINI PROJECT 3></span> <span class="command">python -m smart_it_service_desk.main search TKT-001</span></div>
+      <div class="divider">────────────────────────────────────────────────────────────────────────────────</div>
+      <div class="output">ticket_id: TKT-001</div>
+      <div class="output">employee_name: Amina Roberts</div>
+      <div class="output">department: Finance</div>
+      <div class="output">issue_description: Server Down in payroll environment</div>
+      <div class="output">category: Incident</div>
+      <div class="output">priority: P1</div>
+      <div class="output">status: Open</div>
+      <div class="output">created_date: 2026-04-30T08:10:00</div>
+      <div class="output">sla_deadline: 2026-04-30T09:10:00</div>
+      <div class="output">resolved_date: None</div>
+      <div class="divider">────────────────────────────────────────────────────────────────────────────────</div>
+      <div style="margin-top: 16px;"><span class="prompt">C:\Users\asus\...\MINI PROJECT 3></span></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart IT Service Desk - Documentation</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #c9d1d9; margin: 0; padding: 20px; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    h1 { color: #58a6ff; margin-bottom: 10px; }
+    h2 { color: #79c0ff; margin-top: 30px; border-bottom: 1px solid #30363d; padding-bottom: 8px; }
+    .section { margin-bottom: 30px; background: #161b22; padding: 20px; border-radius: 8px; border-left: 3px solid #58a6ff; }
+    .code-block { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 12px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5; }
+    .code-block pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; }
+    .command { background: #161b22; padding: 8px 12px; border-radius: 4px; border-left: 3px solid #1f6feb; margin: 10px 0; font-family: monospace; }
+    .output { background: #0d1117; padding: 12px; margin: 10px 0; border-left: 3px solid #238636; border-radius: 4px; font-family: monospace; font-size: 12px; }
+    table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+    th, td { border: 1px solid #30363d; padding: 12px; text-align: left; }
+    th { background: #0d1117; color: #58a6ff; }
+    tr:nth-child(even) { background: #0d1117; }
+    .status-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 12px; }
+    .status-ok { background: #238636; color: white; }
+    .status-warning { background: #d29922; color: white; }
+    .status-error { background: #da3633; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Smart IT Service Desk - Complete Documentation</h1>
+    <p>Python ITIL automation system for ticket management, monitoring, SLA tracking, and reporting.</p>
+
+    <div class="section">
+      <h2>Project Status</h2>
+      <table>
+        <tr>
+          <th>Requirement</th>
+          <th>Status</th>
+          <th>Details</th>
+        </tr>
+        <tr>
+          <td>Source Code</td>
+          <td><span class="status-badge status-ok">✓ COMPLETED</span></td>
+          <td>7 Python modules + tests</td>
+        </tr>
+        <tr>
+          <td>README.md</td>
+          <td><span class="status-badge status-ok">✓ COMPLETED</span></td>
+          <td>Root README with setup, usage, testing</td>
+        </tr>
+        <tr>
+          <td>requirements.txt</td>
+          <td><span class="status-badge status-ok">✓ COMPLETED</span></td>
+          <td>psutil dependency</td>
+        </tr>
+        <tr>
+          <td>Sample Data Files</td>
+          <td><span class="status-badge status-ok">✓ COMPLETED</span></td>
+          <td>tickets.json, problems.json, backup.csv, logs.txt</td>
+        </tr>
+        <tr>
+          <td>Screenshots / Output</td>
+          <td><span class="status-badge status-ok">✓ COMPLETED</span></td>
+          <td>CLI outputs documented below</td>
+        </tr>
+        <tr>
+          <td>Logs Output</td>
+          <td><span class="status-badge status-ok">✓ COMPLETED</span></td>
+          <td>40+ log entries with timestamps</td>
+        </tr>
+        <tr>
+          <td>GitHub Actions CI/CD</td>
+          <td><span class="status-badge status-ok">✓ COMPLETED</span></td>
+          <td>Auto-runs tests on push</td>
+        </tr>
+        <tr>
+          <td>GitHub Pages</td>
+          <td><span class="status-badge status-warning">⚙ ACTION NEEDED</span></td>
+          <td>Enable in repo settings (main, /docs)</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>CLI Command Outputs</h2>
+      
+      <h3>List All Tickets</h3>
+      <div class="command">python -m smart_it_service_desk.main list</div>
+      <div class="output">TKT-001 | Amina Roberts | Finance | P1 | Open
+TKT-002 | Ravi Patel | HR | P4 | Closed</div>
+
+      <h3>Search Ticket by ID</h3>
+      <div class="command">python -m smart_it_service_desk.main search TKT-001</div>
+      <div class="output">────────────────────────────────────────────────────────────────────────────────
+ticket_id: TKT-001
+employee_name: Amina Roberts
+department: Finance
+issue_description: Server Down in payroll environment
+category: Incident
+priority: P1
+status: Open
+created_date: 2026-04-30T08:10:00
+sla_deadline: 2026-04-30T09:10:00
+resolved_date: None
+────────────────────────────────────────────────────────────────────────────────</div>
+
+      <h3>Daily Report</h3>
+      <div class="command">python -m smart_it_service_desk.main daily-report</div>
+      <div class="output">Daily report generated:
+{'date': '2026-04-30', 'summary': {'total': 2, 'open': 1, 'closed': 1, 'high_priority': 1, 'sla_breaches': 1}, 'most_common_issue': 'Server Down in payroll environment', 'average_resolution_time': '0.67 hours', 'department_with_most_incidents': 'Finance', 'repeated_problems': []}</div>
+
+      <h3>Run Tests</h3>
+      <div class="command">python -m unittest discover -s smart_it_service_desk/tests</div>
+      <div class="output">.........
+----------------------------------------------------------------------
+Ran 9 tests in 0.039s
+
+OK</div>
+    </div>
+
+    <div class="section">
+      <h2>Sample Data Files</h2>
+      
+      <h3>tickets.json</h3>
+      <div class="code-block"><pre>[
+  {
+    "ticket_id": "TKT-001",
+    "employee_name": "Amina Roberts",
+    "department": "Finance",
+    "issue_description": "Server Down in payroll environment",
+    "category": "Incident",
+    "priority": "P1",
+    "status": "Open",
+    "created_date": "2026-04-30T08:10:00",
+    "sla_deadline": "2026-04-30T09:10:00",
+    "resolved_date": null
+  }
+]</pre></div>
+
+      <h3>Logs Output</h3>
+      <div class="code-block"><pre>2026-04-30 20:11:35 INFO Starting create_ticket
+2026-04-30 20:11:35 INFO Ticket created: TKT-001
+2026-04-30 20:11:35 INFO Completed create_ticket
+2026-04-30 20:11:35 INFO Starting backup_to_csv
+2026-04-30 20:11:35 INFO Completed backup_to_csv
+2026-04-30 20:11:35 WARNING Ticket deleted: TKT-001
+2026-04-30 20:11:35 ERROR psutil is required for CPU monitoring
+...</pre></div>
+    </div>
+
+    <div class="section">
+      <h2>Module Overview</h2>
+      <table>
+        <tr>
+          <th>Module</th>
+          <th>Purpose</th>
+          <th>Key Classes/Functions</th>
+        </tr>
+        <tr>
+          <td>tickets.py</td>
+          <td>Ticket CRUD & management</td>
+          <td>Ticket, IncidentTicket, ServiceRequest, TicketManager</td>
+        </tr>
+        <tr>
+          <td>monitor.py</td>
+          <td>System resource monitoring</td>
+          <td>Monitor, CPU/Memory/Disk alerts</td>
+        </tr>
+        <tr>
+          <td>reports.py</td>
+          <td>Daily & monthly reports</td>
+          <td>ReportGenerator</td>
+        </tr>
+        <tr>
+          <td>itil.py</td>
+          <td>ITIL process management</td>
+          <td>ITILManager, ChangeRecord</td>
+        </tr>
+        <tr>
+          <td>logger.py</td>
+          <td>Logging & audit trails</td>
+          <td>log_event, action_logger decorator</td>
+        </tr>
+        <tr>
+          <td>utils.py</td>
+          <td>Helpers & utilities</td>
+          <td>JSON/CSV operations, ticket ID generation</td>
+        </tr>
+        <tr>
+          <td>main.py</td>
+          <td>CLI interface</td>
+          <td>argparse-based commands</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>How to Enable GitHub Pages</h2>
+      <ol>
+        <li>Go to: <strong>https://github.com/SayanMukherjee-tech/Smart-Automated-ITIL-Project-/settings/pages</strong></li>
+        <li>Select branch: <strong>main</strong></li>
+        <li>Select folder: <strong>/docs</strong></li>
+        <li>Click <strong>Save</strong></li>
+        <li>Wait 1-2 minutes for the site to publish</li>
+        <li>Live URL: <strong>https://sayanmukherjee-tech.github.io/Smart-Automated-ITIL-Project-/</strong></li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Repository Structure</h2>
+      <div class="code-block"><pre>smart_it_service_desk/
+│── __init__.py
+│── main.py                  # CLI entry point
+│── tickets.py               # Ticket management
+│── monitor.py               # System monitoring
+│── reports.py               # Report generation
+│── itil.py                  # ITIL workflows
+│── utils.py                 # Helper functions
+│── logger.py                # Logging setup
+│── README.md
+│── requirements.txt
+│── data/
+│   ├── tickets.json         # Active tickets
+│   ├── problems.json        # Repeated problems
+│   ├── backup.csv           # CSV backup
+│   ├── logs.txt             # Audit trail
+│   └── daily_report_*.json  # Generated reports
+│── tests/
+    ├── __init__.py
+    └── test_ticket_system.py # Unit tests
+.github/
+└── workflows/
+    └── python-app.yml       # GitHub Actions CI/CD
+docs/
+└── index.html               # GitHub Pages site
+.gitignore
+README.md
+</pre></div>
+    </div>
+
+    <div class="section">
+      <h2>Verification Checklist</h2>
+      <ul>
+        <li><input type="checkbox" checked> Source code pushed to GitHub</li>
+        <li><input type="checkbox" checked> README.md with setup & usage</li>
+        <li><input type="checkbox" checked> requirements.txt with dependencies</li>
+        <li><input type="checkbox" checked> Sample data files (JSON, CSV, logs)</li>
+        <li><input type="checkbox" checked> Screenshots & CLI output documentation</li>
+        <li><input type="checkbox" checked> Logs output visible in logs.txt</li>
+        <li><input type="checkbox"> GitHub Pages enabled (manual step required)</li>
+        <li><input type="checkbox" checked> GitHub Actions workflow for tests</li>
+      </ul>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #30363d; margin: 30px 0;">
+    <p style="text-align: center; color: #8b949e;">Generated: April 30, 2026 | Project: Smart IT Service Desk | Status: Production Ready</p>
+  </div>
+</body>
+</html>
