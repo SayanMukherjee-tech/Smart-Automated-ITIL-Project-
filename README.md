@@ -84,7 +84,7 @@ After pushing the repo, enable GitHub Pages from the repository settings using t
 The live site link will then be:
 
 ```text
-https://<your-username>.github.io/<repo-name>/
+ https://sayanmukherjee-tech.github.io/Smart-Automated-ITIL-Project-/
 ```
 
 ## Notes
