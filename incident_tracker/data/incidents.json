@@ -150,5 +150,13 @@
     "reported_by": "Sayan",
     "timestamp": "2026-05-09T22:00:00Z",
     "assigned_team": "Network Team"
+  },
+  {
+    "id": "INC0020",
+    "title": "Scheduled job failed — Staging issue",
+    "description": "Users are facing serious deployment issues",
+    "reported_by": "Mukherjee",
+    "timestamp": "2026-05-09T22:00:00Z",
+    "assigned_team": "App Dev Team"
   }
 ]

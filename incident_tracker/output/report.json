@@ -264,5 +264,19 @@
       "jira": "MOCK-JIRA-INC0019",
       "azure": "MOCK-AZURE-INC0019"
     }
+  },
+  {
+    "id": "INC0020",
+    "title": "Scheduled job failed \u2014 Staging issue",
+    "description": "Users are facing serious deployment issues",
+    "reported_by": "Mukherjee",
+    "timestamp": "2026-05-09T22:00:00+00:00",
+    "assigned_team": "App Dev Team",
+    "severity": "low",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC0020",
+      "jira": "MOCK-JIRA-INC0020",
+      "azure": "MOCK-AZURE-INC0020"
+    }
   }
 ]
