@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IT Incident Auto-Triage Report</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: #f2f6fb;
+            color: #102a4e;
+        }
+
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; background: #eef3fb; }
+        .page-shell { max-width: 1320px; margin: 0 auto; padding: 24px 28px 40px; }
+        .page-header { background: #1f3f70; color: #ffffff; border-radius: 24px; padding: 28px 32px; box-shadow: 0 18px 50px rgba(15, 38, 79, 0.12); }
+        .page-header h1 { margin: 0; font-size: 2rem; letter-spacing: -0.03em; }
+        .page-header p { margin: 10px 0 0; color: #d7e3ff; font-size: 1rem; max-width: 720px; line-height: 1.6; }
+        .summary-cards { display: grid; grid-template-columns: repeat(4, minmax(180px, 1fr)); gap: 18px; margin: 26px 0 20px; }
+        .card { background: #ffffff; border-radius: 22px; padding: 22px 24px; box-shadow: 0 14px 32px rgba(15, 38, 79, 0.08); }
+        .card.total { background: linear-gradient(135deg, #1d4ede 0%, #1c6ce8 100%); color: #f7fbff; }
+        .card-label { display: block; font-size: 0.88rem; letter-spacing: 0.04em; opacity: 0.82; margin-bottom: 12px; }
+        .card-value { font-size: 2.65rem; font-weight: 700; line-height: 1; }
+        .card.count { color: #102a4e; }
+        .card.critical .card-value { color: #d33c48; }
+        .card.high .card-value { color: #f08f00; }
+        .card.medium .card-value { color: #ffb100; }
+        .card.low .card-value { color: #2e7d32; }
+
+        .breakdown-panels { display: grid; grid-template-columns: repeat(3, minmax(240px, 1fr)); gap: 18px; margin-bottom: 28px; }
+        .panel { background: #ffffff; border-radius: 20px; padding: 22px 24px; box-shadow: 0 16px 36px rgba(15, 38, 79, 0.06); }
+        .panel h2 { margin: 0 0 16px; font-size: 1rem; letter-spacing: 0.02em; text-transform: uppercase; color: #1d3b6f; }
+        .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+        .chip { display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 999px; background: #f7f9fd; color: #102a4e; font-size: 0.95rem; font-weight: 600; border: 1px solid #dfe7f4; }
+        .chip strong { color: #1d3b6f; }
+
+        .table-shell { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 900px; background: #ffffff; border-radius: 22px; overflow: hidden; box-shadow: 0 20px 54px rgba(15, 38, 79, 0.08); }
+        thead { background: #12264b; }
+        th, td { padding: 18px 20px; text-align: left; }
+        th { color: #f4f7ff; font-size: 0.92rem; letter-spacing: 0.04em; text-transform: uppercase; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+        tbody tr { transition: background 0.2s ease; }
+        tbody tr:nth-child(even) { background: #f7f9ff; }
+        tbody tr:hover { background: #edf4ff; }
+        td { color: #21335b; border-bottom: 1px solid #e9eef8; vertical-align: middle; }
+
+        .severity-badge { display: inline-flex; align-items: center; justify-content: center; padding: 8px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; }
+        .severity-badge.critical { background: #ffe9ea; color: #bf1f2d; }
+        .severity-badge.high { background: #fff3e4; color: #dc7d12; }
+        .severity-badge.medium { background: #fff9e6; color: #b8800f; }
+        .severity-badge.low { background: #e9f5eb; color: #2d7b35; }
+
+        .footer { margin-top: 28px; font-size: 0.92rem; color: #6b7a96; text-align: center; }
+        .classify-button { background: #ffffff; color: #1d3b6f; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: inherit; }
+        .classify-button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+        .classify-button:active { transform: translateY(0); }
+        .classify-button.loading { opacity: 0.8; cursor: not-allowed; }
+        @media (max-width: 960px) { .summary-cards, .breakdown-panels { grid-template-columns: repeat(2, minmax(180px, 1fr)); } }
+        @media (max-width: 680px) { .summary-cards, .breakdown-panels { grid-template-columns: 1fr; } th, td { padding: 14px 12px; } .page-header > div { flex-direction: column; gap: 16px; } }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="page-header">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+                <div>
+                    <h1>IT Incident Auto-Triage Report</h1>
+                    <p>Summary dashboard for incident triage across ServiceNow, Jira, and Azure Boards. Track incident type, severity, assignment, and ticket delivery in one view.</p>
+                </div>
+                <button id="classify-btn" class="classify-button">
+                    <span id="btn-icon">🔄</span> <span id="btn-text">Auto-Classify New Tickets</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="summary-cards">
+            <div class="card total">
+                <span class="card-label">Total Incidents</span>
+                <span class="card-value">17</span>
+            </div>
+            <div class="card critical">
+                <span class="card-label">Critical</span>
+                <span class="card-value">6</span>
+            </div>
+            <div class="card high">
+                <span class="card-label">High</span>
+                <span class="card-value">2</span>
+            </div>
+            <div class="card medium">
+                <span class="card-label">Medium</span>
+                <span class="card-value">3</span>
+            </div>
+        </div>
+
+        <div class="breakdown-panels">
+            <div class="panel">
+                <h2>Breakdown by Type</h2>
+                <div class="chips"><span class="chip">Network <strong>12</strong></span><span class="chip">Security <strong>3</strong></span><span class="chip">App <strong>2</strong></span></div>
+            </div>
+            <div class="panel">
+                <h2>Breakdown by Severity</h2>
+                <div class="chips"><span class="chip">Critical <strong>6</strong></span><span class="chip">High <strong>2</strong></span><span class="chip">Medium <strong>3</strong></span><span class="chip">Low <strong>6</strong></span></div>
+            </div>
+            <div class="panel">
+                <h2>Breakdown by Team</h2>
+                <div class="chips"><span class="chip">Database Team <strong>1</strong></span><span class="chip">Security Team <strong>4</strong></span><span class="chip">App Dev Team <strong>6</strong></span><span class="chip">Network Team <strong>5</strong></span><span class="chip">Backend Team <strong>1</strong></span></div>
+            </div>
+        </div>
+
+        <div class="table-shell">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Severity</th>
+                        <th>Type</th>
+                        <th>Team</th>
+                        <th>ServiceNow</th>
+                        <th>Jira</th>
+                        <th>Azure Boards</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+            <tr>
+                <td>INC001</td>
+                <td>Database connection timeout on prod-db01</td>
+                <td><span class="severity-badge critical">CRITICAL</span></td>
+                <td>Network</td>
+                <td>Database Team</td>
+                <td>MOCK-SNOW-INC001</td>
+                <td>MOCK-JIRA-INC001</td>
+                <td>MOCK-AZURE-INC001</td>
+            </tr>
+            <tr>
+                <td>INC005</td>
+                <td>Ransomware signature detected on workstation</td>
+                <td><span class="severity-badge critical">CRITICAL</span></td>
+                <td>Security</td>
+                <td>Security Team</td>
+                <td>MOCK-SNOW-INC005</td>
+                <td>MOCK-JIRA-INC005</td>
+                <td>MOCK-AZURE-INC005</td>
+            </tr>
+            <tr>
+                <td>INC010</td>
+                <td>Scheduled job failed — non-production env</td>
+                <td><span class="severity-badge critical">CRITICAL</span></td>
+                <td>Network</td>
+                <td>App Dev Team</td>
+                <td>MOCK-SNOW-INC010</td>
+                <td>MOCK-JIRA-INC010</td>
+                <td>MOCK-AZURE-INC010</td>
+            </tr>
+            <tr>
+                <td>INC013</td>
+                <td>Email server outage - Users cannot send/receive emails</td>
+                <td><span class="severity-badge critical">CRITICAL</span></td>
+                <td>Network</td>
+                <td>Network Team</td>
+                <td>MOCK-SNOW-INC013</td>
+                <td>MOCK-JIRA-INC013</td>
+                <td>MOCK-AZURE-INC013</td>
+            </tr>
+            <tr>
+                <td>INC014</td>
+                <td>VPN Gateway Failure - Remote users cannot connect</td>
+                <td><span class="severity-badge critical">CRITICAL</span></td>
+                <td>Network</td>
+                <td>Network Team</td>
+                <td>MOCK-SNOW-INC014</td>
+                <td>MOCK-JIRA-INC014</td>
+                <td>MOCK-AZURE-INC014</td>
+            </tr>
+            <tr>
+                <td>INC015</td>
+                <td>Cloud Server High CPU</td>
+                <td><span class="severity-badge critical">CRITICAL</span></td>
+                <td>Network</td>
+                <td>App Dev Team</td>
+                <td>MOCK-SNOW-INC015</td>
+                <td>MOCK-JIRA-INC015</td>
+                <td>MOCK-AZURE-INC015</td>
+            </tr>
+            <tr>
+                <td>INC004</td>
+                <td>Network switch offline in DC rack B</td>
+                <td><span class="severity-badge high">HIGH</span></td>
+                <td>Network</td>
+                <td>Network Team</td>
+                <td>MOCK-SNOW-INC004</td>
+                <td>MOCK-JIRA-INC004</td>
+                <td>MOCK-AZURE-INC004</td>
+            </tr>
+            <tr>
+                <td>INC006</td>
+                <td>Payment gateway timeout — Stripe API 503</td>
+                <td><span class="severity-badge high">HIGH</span></td>
+                <td>App</td>
+                <td>App Dev Team</td>
+                <td>MOCK-SNOW-INC006</td>
+                <td>MOCK-JIRA-INC006</td>
+                <td>MOCK-AZURE-INC006</td>
+            </tr>
+            <tr>
+                <td>INC007</td>
+                <td>Intermittent packet loss on VLAN 30</td>
+                <td><span class="severity-badge medium">MEDIUM</span></td>
+                <td>Network</td>
+                <td>Network Team</td>
+                <td>MOCK-SNOW-INC007</td>
+                <td>MOCK-JIRA-INC007</td>
+                <td>MOCK-AZURE-INC007</td>
+            </tr>
+            <tr>
+                <td>INC009</td>
+                <td>API response slow — P95 latency 4.2s</td>
+                <td><span class="severity-badge medium">MEDIUM</span></td>
+                <td>Network</td>
+                <td>App Dev Team</td>
+                <td>MOCK-SNOW-INC009</td>
+                <td>MOCK-JIRA-INC009</td>
+                <td>MOCK-AZURE-INC009</td>
+            </tr>
+            <tr>
+                <td>INC012</td>
+                <td>DNS resolution intermittent on 10.2.0.0/16</td>
+                <td><span class="severity-badge medium">MEDIUM</span></td>
+                <td>Network</td>
+                <td>Network Team</td>
+                <td>MOCK-SNOW-INC012</td>
+                <td>MOCK-JIRA-INC012</td>
+                <td>MOCK-AZURE-INC012</td>
+            </tr>
+            <tr>
+                <td>INC002</td>
+                <td>Suspicious login attempts from unknown IP</td>
+                <td><span class="severity-badge low">LOW</span></td>
+                <td>Security</td>
+                <td>Security Team</td>
+                <td>MOCK-SNOW-INC002</td>
+                <td>MOCK-JIRA-INC002</td>
+                <td>MOCK-AZURE-INC002</td>
+            </tr>
+            <tr>
+                <td>INC003</td>
+                <td>Checkout service returning NullPointerException</td>
+                <td><span class="severity-badge low">LOW</span></td>
+                <td>App</td>
+                <td>App Dev Team</td>
+                <td>MOCK-SNOW-INC003</td>
+                <td>MOCK-JIRA-INC003</td>
+                <td>MOCK-AZURE-INC003</td>
+            </tr>
+            <tr>
+                <td>INC008</td>
+                <td>Phishing email reported by 3 employees</td>
+                <td><span class="severity-badge low">LOW</span></td>
+                <td>Security</td>
+                <td>Security Team</td>
+                <td>MOCK-SNOW-INC008</td>
+                <td>MOCK-JIRA-INC008</td>
+                <td>MOCK-AZURE-INC008</td>
+            </tr>
+            <tr>
+                <td>INC011</td>
+                <td>Minor firewall rule misconfiguration found</td>
+                <td><span class="severity-badge low">LOW</span></td>
+                <td>Network</td>
+                <td>Security Team</td>
+                <td>MOCK-SNOW-INC011</td>
+                <td>MOCK-JIRA-INC011</td>
+                <td>MOCK-AZURE-INC011</td>
+            </tr>
+            <tr>
+                <td>INC0016</td>
+                <td>Cloud service blockage</td>
+                <td><span class="severity-badge low">LOW</span></td>
+                <td>Network</td>
+                <td>Backend Team</td>
+                <td>MOCK-SNOW-INC0016</td>
+                <td>MOCK-JIRA-INC0016</td>
+                <td>MOCK-AZURE-INC0016</td>
+            </tr>
+            <tr>
+                <td>INC0017</td>
+                <td>Cloud  blockage</td>
+                <td><span class="severity-badge low">LOW</span></td>
+                <td>Network</td>
+                <td>App Dev Team</td>
+                <td>MOCK-SNOW-INC0017</td>
+                <td>MOCK-JIRA-INC0017</td>
+                <td>MOCK-AZURE-INC0017</td>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">Generated by IT Incident Auto-Triage & Tracker</div>
+    </div>
+    <script>
+        document.getElementById('classify-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('classify-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            
+            btn.classList.add('loading');
+            btnText.innerText = 'Classifying...';
+            btnIcon.innerText = '⏳';
+            btn.disabled = true;
+            
+            try {
+                const response = await fetch('/classify', { method: 'POST' });
+                if (response.ok) {
+                    btnText.innerText = 'Success! Reloading...';
+                    btnIcon.innerText = '✅';
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    btnText.innerText = 'Error occurred';
+                    btnIcon.innerText = '❌';
+                    btn.disabled = false;
+                    btn.classList.remove('loading');
+                }
+            } catch (err) {
+                btnText.innerText = 'Server unreachable (Run web_server.py)';
+                btnIcon.innerText = '❌';
+                btn.disabled = false;
+                btn.classList.remove('loading');
+                console.error(err);
+            }
+        });
+    </script>
+</body>
+</html>

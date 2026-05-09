@@ -1,0 +1,254 @@
+[
+  {
+    "id": "INC001",
+    "title": "Database connection timeout on prod-db01",
+    "description": "Production database server prod-db01 is not responding to connection requests. The application is experiencing outages.",
+    "reported_by": "John Doe",
+    "timestamp": "2026-04-27T08:30:00+00:00",
+    "assigned_team": "Database Team",
+    "severity": "critical",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC001",
+      "jira": "MOCK-JIRA-INC001",
+      "azure": "MOCK-AZURE-INC001"
+    }
+  },
+  {
+    "id": "INC002",
+    "title": "Suspicious login attempts from unknown IP",
+    "description": "Multiple failed login attempts detected from external IP addresses. Potential unauthorized access.",
+    "reported_by": "Jane Smith",
+    "timestamp": "2026-04-27T09:15:00+00:00",
+    "assigned_team": "Security Team",
+    "severity": "low",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC002",
+      "jira": "MOCK-JIRA-INC002",
+      "azure": "MOCK-AZURE-INC002"
+    }
+  },
+  {
+    "id": "INC003",
+    "title": "Checkout service returning NullPointerException",
+    "description": "Checkout service is throwing NullPointerException errors. Customers cannot complete purchases.",
+    "reported_by": "Mike Johnson",
+    "timestamp": "2026-04-27T10:00:00+00:00",
+    "assigned_team": "App Dev Team",
+    "severity": "low",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC003",
+      "jira": "MOCK-JIRA-INC003",
+      "azure": "MOCK-AZURE-INC003"
+    }
+  },
+  {
+    "id": "INC004",
+    "title": "Network switch offline in DC rack B",
+    "description": "Network switch in datacenter rack B has gone offline. All servers in that rack are unreachable.",
+    "reported_by": "Sarah Williams",
+    "timestamp": "2026-04-27T10:45:00+00:00",
+    "assigned_team": "Network Team",
+    "severity": "high",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC004",
+      "jira": "MOCK-JIRA-INC004",
+      "azure": "MOCK-AZURE-INC004"
+    }
+  },
+  {
+    "id": "INC005",
+    "title": "Ransomware signature detected on workstation",
+    "description": "Antivirus has detected ransomware signature on workstation WS-042. Immediate isolation required.",
+    "reported_by": "Tom Brown",
+    "timestamp": "2026-04-27T11:30:00+00:00",
+    "assigned_team": "Security Team",
+    "severity": "critical",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC005",
+      "jira": "MOCK-JIRA-INC005",
+      "azure": "MOCK-AZURE-INC005"
+    }
+  },
+  {
+    "id": "INC006",
+    "title": "Payment gateway timeout \u2014 Stripe API 503",
+    "description": "Payment gateway returning HTTP 503 errors. Stripe API is unavailable causing transaction failures.",
+    "reported_by": "Emily Davis",
+    "timestamp": "2026-04-27T12:00:00+00:00",
+    "assigned_team": "App Dev Team",
+    "severity": "high",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC006",
+      "jira": "MOCK-JIRA-INC006",
+      "azure": "MOCK-AZURE-INC006"
+    }
+  },
+  {
+    "id": "INC007",
+    "title": "Intermittent packet loss on VLAN 30",
+    "description": "Users on VLAN 30 experiencing intermittent packet loss. Network performance degraded.",
+    "reported_by": "Chris Wilson",
+    "timestamp": "2026-04-27T13:00:00+00:00",
+    "assigned_team": "Network Team",
+    "severity": "medium",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC007",
+      "jira": "MOCK-JIRA-INC007",
+      "azure": "MOCK-AZURE-INC007"
+    }
+  },
+  {
+    "id": "INC008",
+    "title": "Phishing email reported by 3 employees",
+    "description": "Three employees have reported a phishing email. The email contains malicious links.",
+    "reported_by": "Lisa Anderson",
+    "timestamp": "2026-04-27T13:30:00+00:00",
+    "assigned_team": "Security Team",
+    "severity": "low",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC008",
+      "jira": "MOCK-JIRA-INC008",
+      "azure": "MOCK-AZURE-INC008"
+    }
+  },
+  {
+    "id": "INC009",
+    "title": "API response slow \u2014 P95 latency 4.2s",
+    "description": "API endpoints are responding slowly. P95 latency has increased to 4.2 seconds.",
+    "reported_by": "David Martinez",
+    "timestamp": "2026-04-27T14:00:00+00:00",
+    "assigned_team": "App Dev Team",
+    "severity": "medium",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC009",
+      "jira": "MOCK-JIRA-INC009",
+      "azure": "MOCK-AZURE-INC009"
+    }
+  },
+  {
+    "id": "INC010",
+    "title": "Scheduled job failed \u2014 non-production env",
+    "description": "Scheduled maintenance job failed in non-production environment. No business impact.",
+    "reported_by": "Rachel Lee",
+    "timestamp": "2026-04-27T14:30:00+00:00",
+    "assigned_team": "App Dev Team",
+    "severity": "critical",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC010",
+      "jira": "MOCK-JIRA-INC010",
+      "azure": "MOCK-AZURE-INC010"
+    }
+  },
+  {
+    "id": "INC011",
+    "title": "Minor firewall rule misconfiguration found",
+    "description": "Audit discovered minor firewall rule misconfiguration. No active exploitation detected.",
+    "reported_by": "Kevin Taylor",
+    "timestamp": "2026-04-27T15:00:00+00:00",
+    "assigned_team": "Security Team",
+    "severity": "low",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC011",
+      "jira": "MOCK-JIRA-INC011",
+      "azure": "MOCK-AZURE-INC011"
+    }
+  },
+  {
+    "id": "INC012",
+    "title": "DNS resolution intermittent on 10.2.0.0/16",
+    "description": "DNS resolution is intermittent for hosts in the 10.2.0.0/16 subnet.",
+    "reported_by": "Amy White",
+    "timestamp": "2026-04-27T15:30:00+00:00",
+    "assigned_team": "Network Team",
+    "severity": "medium",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC012",
+      "jira": "MOCK-JIRA-INC012",
+      "azure": "MOCK-AZURE-INC012"
+    }
+  },
+  {
+    "id": "INC013",
+    "title": "Email server outage - Users cannot send/receive emails",
+    "description": "The primary Exchange email server has crashed, preventing all users from sending or receiving external and internal emails.",
+    "reported_by": "You",
+    "timestamp": "2026-05-09T21:45:00+00:00",
+    "assigned_team": "Network Team",
+    "severity": "critical",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC013",
+      "jira": "MOCK-JIRA-INC013",
+      "azure": "MOCK-AZURE-INC013"
+    }
+  },
+  {
+    "id": "INC014",
+    "title": "VPN Gateway Failure - Remote users cannot connect",
+    "description": "The primary VPN gateway is down. Remote employees are unable to access the internal network.",
+    "reported_by": "System Monitor",
+    "timestamp": "2026-05-09T21:55:00+00:00",
+    "assigned_team": "Network Team",
+    "severity": "critical",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC014",
+      "jira": "MOCK-JIRA-INC014",
+      "azure": "MOCK-AZURE-INC014"
+    }
+  },
+  {
+    "id": "INC015",
+    "title": "Cloud Server High CPU",
+    "description": "The production web server is at 99% CPU usage. Users are reporting slow loading times.",
+    "reported_by": "Your Name",
+    "timestamp": "2026-05-09T22:00:00+00:00",
+    "assigned_team": "App Dev Team",
+    "severity": "critical",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC015",
+      "jira": "MOCK-JIRA-INC015",
+      "azure": "MOCK-AZURE-INC015"
+    }
+  },
+  {
+    "id": "INC0016",
+    "title": "Cloud service blockage",
+    "description": "Users are facing serious power failure",
+    "reported_by": "Sayan",
+    "timestamp": "2026-05-09T22:00:00+00:00",
+    "assigned_team": "Backend Team",
+    "severity": "low",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC0016",
+      "jira": "MOCK-JIRA-INC0016",
+      "azure": "MOCK-AZURE-INC0016"
+    }
+  },
+  {
+    "id": "INC0017",
+    "title": "Cloud  blockage",
+    "description": "Users are facing serious deployment issues",
+    "reported_by": "Sayan",
+    "timestamp": "2026-05-09T22:00:00+00:00",
+    "assigned_team": "App Dev Team",
+    "severity": "low",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC0017",
+      "jira": "MOCK-JIRA-INC0017",
+      "azure": "MOCK-AZURE-INC0017"
+    }
+  },
+  {
+    "id": "INC0018",
+    "title": "ABC",
+    "description": "Users are facing serious deployment issues",
+    "reported_by": "Sayan",
+    "timestamp": "2026-05-09T22:00:00+00:00",
+    "assigned_team": "Network Team",
+    "severity": "low",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC0018",
+      "jira": "MOCK-JIRA-INC0018",
+      "azure": "MOCK-AZURE-INC0018"
+    }
+  }
+]

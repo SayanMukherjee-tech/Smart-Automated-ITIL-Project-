@@ -19,7 +19,6 @@ build/
 # Logs and reports
 *.log
 *.csv
-*.json
 
 # OS files
 .DS_Store
@@ -32,4 +31,3 @@ build/
 Smart_IT_Service_Desk_Project.zip
 
 # Ignore legacy workspace folders not part of current submission
-incident_tracker/
