@@ -83,12 +83,20 @@ After pushing the repo, enable GitHub Pages from the repository settings using t
 
 The live site link will then be:
 
-```text
- https://sayanmukherjee-tech.github.io/Smart-Automated-ITIL-Project-/
-```
+https://sayanmukherjee-tech.github.io/Smart-Automated-ITIL-Project-/
+
+points included are 
+✅ Source code
+✅ README.md
+✅ requirements.txt
+✅ Sample data files (tickets.json, problems.json, backup.csv, logs.txt)
+✅ Screenshots (HTML files in docs/screenshots/)
+✅ Logs output
 
 ## Notes
 
 - The CLI is the primary interface for the project.
 - Monitoring alerts automatically create high-priority tickets.
 - Reports are generated in JSON format under `smart_it_service_desk/data/`.
+
+
