@@ -158,5 +158,13 @@
     "reported_by": "Mukherjee",
     "timestamp": "2026-05-09T22:00:00Z",
     "assigned_team": "App Dev Team"
+  },
+  {
+    "id": "INC0021",
+    "title": "power outrage",
+    "description": "Users are facing data issues",
+    "reported_by": "adani team",
+    "timestamp": "2026-05-09T22:00:00Z",
+    "assigned_team": "Network Team"
   }
 ]

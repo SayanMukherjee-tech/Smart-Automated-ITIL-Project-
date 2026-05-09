@@ -278,5 +278,19 @@
       "jira": "MOCK-JIRA-INC0020",
       "azure": "MOCK-AZURE-INC0020"
     }
+  },
+  {
+    "id": "INC0021",
+    "title": "power outrage",
+    "description": "Users are facing data issues",
+    "reported_by": "adani team",
+    "timestamp": "2026-05-09T22:00:00+00:00",
+    "assigned_team": "Network Team",
+    "severity": "low",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC0021",
+      "jira": "MOCK-JIRA-INC0021",
+      "azure": "MOCK-AZURE-INC0021"
+    }
   }
 ]
