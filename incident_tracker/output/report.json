@@ -250,5 +250,19 @@
       "jira": "MOCK-JIRA-INC0018",
       "azure": "MOCK-AZURE-INC0018"
     }
+  },
+  {
+    "id": "INC0019",
+    "title": "Scheduled job failed \u2014 non-production env",
+    "description": "Users are facing serious deployment issues",
+    "reported_by": "Sayan",
+    "timestamp": "2026-05-09T22:00:00+00:00",
+    "assigned_team": "Network Team",
+    "severity": "critical",
+    "ticket_ids": {
+      "servicenow": "MOCK-SNOW-INC0019",
+      "jira": "MOCK-JIRA-INC0019",
+      "azure": "MOCK-AZURE-INC0019"
+    }
   }
 ]

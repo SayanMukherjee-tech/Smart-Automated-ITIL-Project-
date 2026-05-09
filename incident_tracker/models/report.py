@@ -72,7 +72,7 @@ class ReportGenerator:
         .page-header {{ background: #1f3f70; color: #ffffff; border-radius: 24px; padding: 28px 32px; box-shadow: 0 18px 50px rgba(15, 38, 79, 0.12); }}
         .page-header h1 {{ margin: 0; font-size: 2rem; letter-spacing: -0.03em; }}
         .page-header p {{ margin: 10px 0 0; color: #d7e3ff; font-size: 1rem; max-width: 720px; line-height: 1.6; }}
-        .summary-cards {{ display: grid; grid-template-columns: repeat(4, minmax(180px, 1fr)); gap: 18px; margin: 26px 0 20px; }}
+        .summary-cards {{ display: grid; grid-template-columns: repeat(5, minmax(180px, 1fr)); gap: 18px; margin: 26px 0 20px; }}
         .card {{ background: #ffffff; border-radius: 22px; padding: 22px 24px; box-shadow: 0 14px 32px rgba(15, 38, 79, 0.08); }}
         .card.total {{ background: linear-gradient(135deg, #1d4ede 0%, #1c6ce8 100%); color: #f7fbff; }}
         .card-label {{ display: block; font-size: 0.88rem; letter-spacing: 0.04em; opacity: 0.82; margin-bottom: 12px; }}
@@ -145,6 +145,10 @@ class ReportGenerator:
             <div class="card medium">
                 <span class="card-label">Medium</span>
                 <span class="card-value">{severity_counts.get('medium', 0)}</span>
+            </div>
+            <div class="card low">
+                <span class="card-label">Low</span>
+                <span class="card-value">{severity_counts.get('low', 0)}</span>
             </div>
         </div>
 
@@ -284,6 +288,7 @@ class ReportGenerator:
             document.querySelector('.card.critical .card-value').innerText = counts.critical;
             document.querySelector('.card.high .card-value').innerText = counts.high;
             document.querySelector('.card.medium .card-value').innerText = counts.medium;
+            document.querySelector('.card.low .card-value').innerText = counts.low;
         }}
 
         document.getElementById('classify-btn').addEventListener('click', handleClassify);

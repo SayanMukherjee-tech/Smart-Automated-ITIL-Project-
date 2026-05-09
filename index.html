@@ -18,7 +18,7 @@
         .page-header { background: #1f3f70; color: #ffffff; border-radius: 24px; padding: 28px 32px; box-shadow: 0 18px 50px rgba(15, 38, 79, 0.12); }
         .page-header h1 { margin: 0; font-size: 2rem; letter-spacing: -0.03em; }
         .page-header p { margin: 10px 0 0; color: #d7e3ff; font-size: 1rem; max-width: 720px; line-height: 1.6; }
-        .summary-cards { display: grid; grid-template-columns: repeat(4, minmax(180px, 1fr)); gap: 18px; margin: 26px 0 20px; }
+        .summary-cards { display: grid; grid-template-columns: repeat(5, minmax(180px, 1fr)); gap: 18px; margin: 26px 0 20px; }
         .card { background: #ffffff; border-radius: 22px; padding: 22px 24px; box-shadow: 0 14px 32px rgba(15, 38, 79, 0.08); }
         .card.total { background: linear-gradient(135deg, #1d4ede 0%, #1c6ce8 100%); color: #f7fbff; }
         .card-label { display: block; font-size: 0.88rem; letter-spacing: 0.04em; opacity: 0.82; margin-bottom: 12px; }
@@ -78,11 +78,11 @@
         <div class="summary-cards">
             <div class="card total">
                 <span class="card-label">Total Incidents</span>
-                <span class="card-value">18</span>
+                <span class="card-value">19</span>
             </div>
             <div class="card critical">
                 <span class="card-label">Critical</span>
-                <span class="card-value">6</span>
+                <span class="card-value">7</span>
             </div>
             <div class="card high">
                 <span class="card-label">High</span>
@@ -92,20 +92,24 @@
                 <span class="card-label">Medium</span>
                 <span class="card-value">3</span>
             </div>
+            <div class="card low">
+                <span class="card-label">Low</span>
+                <span class="card-value">7</span>
+            </div>
         </div>
 
         <div class="breakdown-panels">
             <div class="panel">
                 <h2>Breakdown by Type</h2>
-                <div class="chips"><span class="chip">Network <strong>13</strong></span><span class="chip">Security <strong>3</strong></span><span class="chip">App <strong>2</strong></span></div>
+                <div class="chips"><span class="chip">Network <strong>14</strong></span><span class="chip">Security <strong>3</strong></span><span class="chip">App <strong>2</strong></span></div>
             </div>
             <div class="panel">
                 <h2>Breakdown by Severity</h2>
-                <div class="chips"><span class="chip">Critical <strong>6</strong></span><span class="chip">High <strong>2</strong></span><span class="chip">Medium <strong>3</strong></span><span class="chip">Low <strong>7</strong></span></div>
+                <div class="chips"><span class="chip">Critical <strong>7</strong></span><span class="chip">High <strong>2</strong></span><span class="chip">Medium <strong>3</strong></span><span class="chip">Low <strong>7</strong></span></div>
             </div>
             <div class="panel">
                 <h2>Breakdown by Team</h2>
-                <div class="chips"><span class="chip">Database Team <strong>1</strong></span><span class="chip">Security Team <strong>4</strong></span><span class="chip">App Dev Team <strong>6</strong></span><span class="chip">Network Team <strong>6</strong></span><span class="chip">Backend Team <strong>1</strong></span></div>
+                <div class="chips"><span class="chip">Database Team <strong>1</strong></span><span class="chip">Security Team <strong>4</strong></span><span class="chip">App Dev Team <strong>6</strong></span><span class="chip">Network Team <strong>7</strong></span><span class="chip">Backend Team <strong>1</strong></span></div>
             </div>
         </div>
 
@@ -184,6 +188,16 @@
                 <td>MOCK-SNOW-INC015</td>
                 <td>MOCK-JIRA-INC015</td>
                 <td>MOCK-AZURE-INC015</td>
+            </tr>
+            <tr>
+                <td>INC0019</td>
+                <td>Scheduled job failed — non-production env</td>
+                <td><span class="severity-badge critical">CRITICAL</span></td>
+                <td>Network</td>
+                <td>Network Team</td>
+                <td>MOCK-SNOW-INC0019</td>
+                <td>MOCK-JIRA-INC0019</td>
+                <td>MOCK-AZURE-INC0019</td>
             </tr>
             <tr>
                 <td>INC004</td>
@@ -410,6 +424,7 @@
             document.querySelector('.card.critical .card-value').innerText = counts.critical;
             document.querySelector('.card.high .card-value').innerText = counts.high;
             document.querySelector('.card.medium .card-value').innerText = counts.medium;
+            document.querySelector('.card.low .card-value').innerText = counts.low;
         }
 
         document.getElementById('classify-btn').addEventListener('click', handleClassify);
